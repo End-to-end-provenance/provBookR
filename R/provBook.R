@@ -1,41 +1,10 @@
-# # Data tools:
-# library(DT)
-# library(gsubfn)
-# library(lubridate)
-# library(tidyverse)
-#
-# # HTML tools:
-# library(knitr)
-# library(htmltools)
-# library(markdown)
-# library(shiny)
-# library(shinyjs)
-#
-# # Provenance tools:
-# library(rdtLite) # Load Provenance Collector
-# library(provGraphR) # Load Provenance Traveler
-# library(provParseR) # Load Provenance Parser
-# library(provDebugR) # Load Provenance Debugger
-# library(provSummarizeR) # Load Provenance Summarizer
-# library(Rclean) # Load Provenance Cleaner
-
-# Load browser
-# Query Provenance
-# Summarize provenance
-# Move Forward
-# Error Handling: Check for malicious input
-# Move Backward
-# Error Handling: Check for malicious input
-# Generate provbook
-# Error Handling: make sure data pipeline is robust
-# Add annotations
-# Error Handling: Check for malicious input
-# Specify layout
-# Error Handling: Check for malicious input
-# Create dynamic html
-# Error Handling: make sure data pipeline is robust
-# provbook.html()
-# TODO: Run provBookR with no mode specified options
+#' Main provBookR interface
+#'
+#' @name provBook
+#' @return full provBookR browser or enable lite operation
+#' @param file.name provenance file name
+#' @param mode type of browsing
+#' @export
 provBookR <- function(file.name, mode) {
 
   # Collect the user input mode
@@ -58,11 +27,14 @@ provBookR.lite <- function(file.name) {
 
   # Check the file type of file.name
   if (json.check(file.name)) {
+    
     # Query provenance
     provBookR.prov.querying(file.name, data.object.name, "BO")
   } else {
+    
     # Record provenance
     recorded.prov <- provBookR.prov.recording(file.name)
+    
     # Query provenance
     provBookR.prov.querying(recorded.prov, data.object.name, "BO")
   }

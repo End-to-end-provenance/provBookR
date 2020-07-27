@@ -4,6 +4,7 @@
 #' @param prov.json provenance file
 #' @param data.object.name name of the data object file
 #' @param history object provenance
+#' @importFrom provParseR get.data.nodes
 provBookR.prov.querying <- function(prov.json, data.object.name, history) {
 
   # Parse the prov.json file:

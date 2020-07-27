@@ -3,6 +3,7 @@
 #' @name browser
 #' @return provBookR browser
 #' @param file.name provenance file name
+#' @importFrom provParseR prov.parse
 #' @export
 provBookR.prov.browse <- function(file.name) {
 
@@ -101,7 +102,6 @@ UI.user.input.quit <- function() {
   }
 }
 
-
 UI.user.input.help <- function() {
 
   # Create user "help menu"
@@ -119,9 +119,11 @@ UI.user.input.help <- function() {
   cat(menu, sep = "\n")
 }
 
-#' @rdname provBookR.print.nodes
+#' @name provBookR.print.nodes
 #' @aliases provBookR.print.nodes
 #' @param prove.json provenance file name
+#' @importFrom provParseR get.data.nodes
+#' @return printed data nodes
 # TODO: Might need to include procedure nodes
 provBookR.print.nodes <- function(prov.json) {
 

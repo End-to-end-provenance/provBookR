@@ -2,5 +2,8 @@
 
 export(prov.browser)
 export(prov.recording)
+export(provBookR)
 export(provBookR.prov.browse)
 export(provBookR.prov.presentation)
+importFrom(provParseR,get.data.nodes)
+importFrom(provParseR,prov.parse)

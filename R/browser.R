@@ -115,7 +115,8 @@ UI.user.input.help  <- function() {
   cat(menu, sep = '\n')
 }
 
-#' @name provBookR.print.nodes
+#' @rdname provBookR.print.nodes
+#' @aliases provBookR.print.nodes
 #' @param prove.json provenance file name
 # TODO: Might need to include procedure nodes
 provBookR.print.nodes <- function(prov.json) {

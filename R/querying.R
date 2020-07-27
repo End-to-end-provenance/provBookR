@@ -5,6 +5,10 @@
 #' @param data.object.name name of the data object file
 #' @param history object provenance
 #' @importFrom provParseR get.data.nodes
+#' @importFrom provParseR get.proc.nodes
+#' @importFrom provParseR get.variable.named
+#' @importFrom provGraphR create.graph
+#' @importFrom provGraphR get.lineage
 provBookR.prov.querying <- function(prov.json, data.object.name, history) {
 
   # Parse the prov.json file:

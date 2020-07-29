@@ -22,6 +22,7 @@ provBookR.prov.processing <- function(parsed.prov.df) {
 
   # Add a row to the data frame to print nothing if the ddg.df.sub is non-even
   if (is.even(number.pages)) {
+    
     # Do nothing
   } else {
 

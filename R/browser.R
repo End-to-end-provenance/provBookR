@@ -4,6 +4,7 @@
 #' @return provBookR browser
 #' @param file.name provenance file name
 #' @importFrom provParseR prov.parse
+#' @importFrom provParseR get.data.nodes
 #' @export
 provBookR.prov.browse <- function(file.name) {
 
@@ -61,7 +62,7 @@ prov.browser <- function(file.name) {
     } else if (user.input.command == "ls" | user.input.command == "LS") {
 
       # Print the nodes
-      provBookR.print.nodes(file.name)
+      print.nodes(file.name)
     } else if (user.input.command == "ao" | user.input.command == "AO") {
 
       # Call provbook forweard lineage
@@ -90,6 +91,8 @@ prov.browser <- function(file.name) {
   }
 }
 
+#' @rdname browser
+#' @aliases browser
 UI.user.input.quit <- function() {
 
   # Alert user about their quit options
@@ -102,6 +105,8 @@ UI.user.input.quit <- function() {
   }
 }
 
+#' @rdname browser
+#' @aliases browser
 UI.user.input.help <- function() {
 
   # Create user "help menu"
@@ -119,13 +124,11 @@ UI.user.input.help <- function() {
   cat(menu, sep = "\n")
 }
 
-#' @name provBookR.print.nodes
-#' @aliases provBookR.print.nodes
+#' @name print.nodes
+#' @aliases print.nodes
 #' @param prove.json provenance file name
-#' @importFrom provParseR get.data.nodes
 #' @return printed data nodes
-# TODO: Might need to include procedure nodes
-provBookR.print.nodes <- function(prov.json) {
+print.nodes <- function(prov.json) {
 
   # Parse .json file
   parsed.json <- prov.parse(prov.json)

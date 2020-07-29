@@ -4,6 +4,8 @@
 \alias{browser}
 \alias{provBookR.prov.browse}
 \alias{prov.browser}
+\alias{UI.user.input.quit}
+\alias{UI.user.input.help}
 \alias{UI.user.input.AO}
 \alias{UI.user.input.BO}
 \alias{UI.user.input.S}
@@ -15,6 +17,10 @@
 provBookR.prov.browse(file.name)
 
 prov.browser(file.name)
+
+UI.user.input.quit()
+
+UI.user.input.help()
 
 UI.user.input.AO(prov.json, data.object.name, history)
 

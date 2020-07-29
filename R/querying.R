@@ -7,8 +7,7 @@
 #' @importFrom provParseR get.data.nodes
 #' @importFrom provParseR get.proc.nodes
 #' @importFrom provParseR get.variable.named
-#' @importFrom provGraphR create.graph
-#' @importFrom provGraphR get.lineage
+#' @export
 provBookR.prov.querying <- function(prov.json, data.object.name, history) {
 
   # Parse the prov.json file:

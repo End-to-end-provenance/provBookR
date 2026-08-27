@@ -23,7 +23,7 @@ export const bookNavigationState = $state({
 });
 
 export const guideState = $state({
-  enabled: true
+  enabled: false
 });
 
 export interface Annotation {

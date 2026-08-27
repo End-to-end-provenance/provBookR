@@ -14,11 +14,19 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    provParseR (>= 0.1.2)
+    provParseR (>= 0.1.2),
+    jsonlite,
+    servr
 Suggests:
     rdtLite,
-    rdt
+    rdt,
+    testthat (>= 3.0.0)
+Remotes: 
+    End-to-end-provenance/provParseR,
+    End-to-end-provenance/rdtLite,
+    End-to-end-provenance/rdt
 Additional_repositories: https://end-to-end-provenance.github.io/drat/
 URL: https://github.com/End-to-end-provenance
 BugReports: https://github.com/End-to-end-provenance/provBookR/issues
-RoxygenNote: 7.1.1
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

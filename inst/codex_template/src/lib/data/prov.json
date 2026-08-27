@@ -19,7 +19,7 @@
       "rdt:elapsedTime": "0.000"
     },
     "rdt:p2": {
-      "rdt:name": "draft_v1 <- 'Intro: First draft of HF 2019 REU Proposal'",
+      "rdt:name": "draft_v1 <- 'Intro: First draft of proposal'",
       "rdt:type": "Operation",
       "rdt:elapsedTime": "0.008",
       "rdt:scriptNum": 1,
@@ -47,168 +47,18 @@
       "rdt:startLine": 11
     },
     "rdt:p6": {
-      "rdt:name": "pdf('HF_2019_REU_PROPOSAL.pdf'); dev.off()",
+      "rdt:name": "pdf('proposal.pdf'); dev.off()",
       "rdt:type": "Operation",
       "rdt:elapsedTime": "0.045",
       "rdt:scriptNum": 1,
       "rdt:startLine": 14
-    },
-
-    "rdt:p10": {
-      "rdt:name": "coffee_tracker.R",
-      "rdt:type": "Start",
-      "rdt:elapsedTime": "0.000"
-    },
-    "rdt:p11": {
-      "rdt:name": "daily_cups <- c(Mon=2, Tue=3, Wed=2, Thu=4, Fri=1)",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.002",
-      "rdt:scriptNum": 2,
-      "rdt:startLine": 3
-    },
-    "rdt:p12": {
-      "rdt:name": "price_per_cup <- 4.50",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 2,
-      "rdt:startLine": 4
-    },
-    "rdt:p13": {
-      "rdt:name": "weekly_spent <- sum(daily_cups) * price_per_cup",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.003",
-      "rdt:scriptNum": 2,
-      "rdt:startLine": 6
-    },
-    "rdt:p14": {
-      "rdt:name": "write.csv(weekly_spent, 'coffee_summary.csv')",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.012",
-      "rdt:scriptNum": 2,
-      "rdt:startLine": 8
-    },
-
-    "rdt:p20": {
-      "rdt:name": "weather_analysis.R",
-      "rdt:type": "Start",
-      "rdt:elapsedTime": "0.000"
-    },
-    "rdt:p21": {
-      "rdt:name": "temps <- c(72, 68, 75, 80, 77, 65, 70)",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.002",
-      "rdt:scriptNum": 3,
-      "rdt:startLine": 3
-    },
-    "rdt:p22": {
-      "rdt:name": "days <- c('Mon','Tue','Wed','Thu','Fri','Sat','Sun')",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 3,
-      "rdt:startLine": 4
-    },
-    "rdt:p23": {
-      "rdt:name": "avg_temp <- mean(temps)",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 3,
-      "rdt:startLine": 6
-    },
-    "rdt:p24": {
-      "rdt:name": "hot_days <- days[temps > avg_temp]",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.003",
-      "rdt:scriptNum": 3,
-      "rdt:startLine": 7
-    },
-    "rdt:p25": {
-      "rdt:name": "pdf('weather_chart.pdf'); barplot(temps); dev.off()",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.035",
-      "rdt:scriptNum": 3,
-      "rdt:startLine": 9
-    },
-
-    "rdt:p30": {
-      "rdt:name": "recipe_scaling.R",
-      "rdt:type": "Start",
-      "rdt:elapsedTime": "0.000"
-    },
-    "rdt:p31": {
-      "rdt:name": "recipe <- data.frame(ing = c('flour','sugar','eggs'), amt = c(2, 1, 3))",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.004",
-      "rdt:scriptNum": 4,
-      "rdt:startLine": 3
-    },
-    "rdt:p32": {
-      "rdt:name": "scale_factor <- 3",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 4,
-      "rdt:startLine": 5
-    },
-    "rdt:p33": {
-      "rdt:name": "scaled <- recipe; scaled$amt <- recipe$amt * scale_factor",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.002",
-      "rdt:scriptNum": 4,
-      "rdt:startLine": 6
-    },
-    "rdt:p34": {
-      "rdt:name": "write.csv(scaled, 'party_recipe.csv')",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.010",
-      "rdt:scriptNum": 4,
-      "rdt:startLine": 8
-    },
-
-    "rdt:p40": {
-      "rdt:name": "student_grades.R",
-      "rdt:type": "Start",
-      "rdt:elapsedTime": "0.000"
-    },
-    "rdt:p41": {
-      "rdt:name": "students <- c('Alice','Bob','Carol','Dan')",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 5,
-      "rdt:startLine": 2
-    },
-    "rdt:p42": {
-      "rdt:name": "scores <- c(92, 85, 78, 96)",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 5,
-      "rdt:startLine": 3
-    },
-    "rdt:p43": {
-      "rdt:name": "grades <- data.frame(name = students, score = scores)",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.002",
-      "rdt:scriptNum": 5,
-      "rdt:startLine": 4
-    },
-    "rdt:p44": {
-      "rdt:name": "grades$letter <- ifelse(grades$score >= 90, 'A', 'B')",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.003",
-      "rdt:scriptNum": 5,
-      "rdt:startLine": 6
-    },
-    "rdt:p45": {
-      "rdt:name": "class_avg <- mean(grades$score)",
-      "rdt:type": "Operation",
-      "rdt:elapsedTime": "0.001",
-      "rdt:scriptNum": 5,
-      "rdt:startLine": 7
     }
   },
 
   "entity": {
     "rdt:d1": {
       "rdt:name": "draft_v1",
-      "rdt:value": "Intro: First draft of HF 2019 REU Proposal",
+      "rdt:value": "Intro: First draft of proposal",
       "rdt:valType": "character",
       "rdt:type": "Snapshot"
     },
@@ -231,126 +81,11 @@
       "rdt:type": "Snapshot"
     },
     "rdt:d5": {
-      "rdt:name": "HF_2019_REU_PROPOSAL.pdf",
-      "rdt:value": "HF_2019_REU_PROPOSAL.pdf",
+      "rdt:name": "proposal.pdf",
+      "rdt:value": "proposal.pdf",
       "rdt:valType": "pdf_document",
       "rdt:type": "File",
       "rdt:hash": "a9b8c7d6"
-    },
-
-    "rdt:d11": {
-      "rdt:name": "daily_cups",
-      "rdt:value": "c(Mon=2, Tue=3, Wed=2, Thu=4, Fri=1)",
-      "rdt:valType": "numeric vector (5)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d12": {
-      "rdt:name": "price_per_cup",
-      "rdt:value": "$4.50",
-      "rdt:valType": "numeric (1)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d13": {
-      "rdt:name": "weekly_spent",
-      "rdt:value": "$54.00 total",
-      "rdt:valType": "numeric (1)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d14": {
-      "rdt:name": "coffee_summary.csv",
-      "rdt:value": "coffee_summary.csv",
-      "rdt:valType": "csv_document",
-      "rdt:type": "File",
-      "rdt:hash": "c1o2f3f4"
-    },
-
-    "rdt:d21": {
-      "rdt:name": "temps",
-      "rdt:value": "c(72, 68, 75, 80, 77, 65, 70)",
-      "rdt:valType": "numeric vector (7)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d22": {
-      "rdt:name": "days",
-      "rdt:value": "c('Mon','Tue','Wed','Thu','Fri','Sat','Sun')",
-      "rdt:valType": "character vector (7)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d23": {
-      "rdt:name": "avg_temp",
-      "rdt:value": "72.43°F",
-      "rdt:valType": "numeric (1)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d24": {
-      "rdt:name": "hot_days",
-      "rdt:value": "c('Wed','Thu','Fri')",
-      "rdt:valType": "character vector (3)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d25": {
-      "rdt:name": "weather_chart.pdf",
-      "rdt:value": "weather_chart.pdf",
-      "rdt:valType": "pdf_document",
-      "rdt:type": "File",
-      "rdt:hash": "w1e2a3t4"
-    },
-
-    "rdt:d31": {
-      "rdt:name": "recipe",
-      "rdt:value": "data.frame(3 ingredients)",
-      "rdt:valType": "data_frame (3x2)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d32": {
-      "rdt:name": "scale_factor",
-      "rdt:value": "3x batch",
-      "rdt:valType": "numeric (1)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d33": {
-      "rdt:name": "scaled",
-      "rdt:value": "data.frame(3x amounts tripled)",
-      "rdt:valType": "data_frame (3x2)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d34": {
-      "rdt:name": "party_recipe.csv",
-      "rdt:value": "party_recipe.csv",
-      "rdt:valType": "csv_document",
-      "rdt:type": "File",
-      "rdt:hash": "p1a2r3t4"
-    },
-
-    "rdt:d41": {
-      "rdt:name": "students",
-      "rdt:value": "c('Alice','Bob','Carol','Dan')",
-      "rdt:valType": "character vector (4)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d42": {
-      "rdt:name": "scores",
-      "rdt:value": "c(92, 85, 78, 96)",
-      "rdt:valType": "numeric vector (4)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d43": {
-      "rdt:name": "grades",
-      "rdt:value": "data.frame(4 students x scores)",
-      "rdt:valType": "data_frame (4x2)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d44": {
-      "rdt:name": "grades (with letters)",
-      "rdt:value": "data.frame(4 students with A/B letters)",
-      "rdt:valType": "data_frame (4x3)",
-      "rdt:type": "Snapshot"
-    },
-    "rdt:d45": {
-      "rdt:name": "class_avg",
-      "rdt:value": "87.75 avg score",
-      "rdt:valType": "numeric (1)",
-      "rdt:type": "Snapshot"
     },
 
     "rdt:environment": {
@@ -359,77 +94,28 @@
       "rdt:operatingSystem": "macOS 15.0",
       "rdt:language": "R",
       "rdt:langVersion": "R version 4.3.2",
-      "rdt:script": "everyday_prov_examples.R",
+      "rdt:script": "proposal_workflow.R",
       "rdt:provTimestamp": "2026-07-20T12:38:00EDT",
-      "rdt:totalElapsedTime": "0.320"
+      "rdt:totalElapsedTime": "0.045"
     }
   },
 
   "wasGeneratedBy": {
-    "rdt:pd1":  { "prov:activity": "rdt:p2",  "prov:entity": "rdt:d1" },
-    "rdt:pd2":  { "prov:activity": "rdt:p3",  "prov:entity": "rdt:d2" },
-    "rdt:pd3":  { "prov:activity": "rdt:p4",  "prov:entity": "rdt:d3" },
-    "rdt:pd4":  { "prov:activity": "rdt:p5",  "prov:entity": "rdt:d4" },
-    "rdt:pd5":  { "prov:activity": "rdt:p6",  "prov:entity": "rdt:d5" },
-
-    "rdt:pd11": { "prov:activity": "rdt:p11", "prov:entity": "rdt:d11" },
-    "rdt:pd12": { "prov:activity": "rdt:p12", "prov:entity": "rdt:d12" },
-    "rdt:pd13": { "prov:activity": "rdt:p13", "prov:entity": "rdt:d13" },
-    "rdt:pd14": { "prov:activity": "rdt:p14", "prov:entity": "rdt:d14" },
-
-    "rdt:pd21": { "prov:activity": "rdt:p21", "prov:entity": "rdt:d21" },
-    "rdt:pd22": { "prov:activity": "rdt:p22", "prov:entity": "rdt:d22" },
-    "rdt:pd23": { "prov:activity": "rdt:p23", "prov:entity": "rdt:d23" },
-    "rdt:pd24": { "prov:activity": "rdt:p24", "prov:entity": "rdt:d24" },
-    "rdt:pd25": { "prov:activity": "rdt:p25", "prov:entity": "rdt:d25" },
-
-    "rdt:pd31": { "prov:activity": "rdt:p31", "prov:entity": "rdt:d31" },
-    "rdt:pd32": { "prov:activity": "rdt:p32", "prov:entity": "rdt:d32" },
-    "rdt:pd33": { "prov:activity": "rdt:p33", "prov:entity": "rdt:d33" },
-    "rdt:pd34": { "prov:activity": "rdt:p34", "prov:entity": "rdt:d34" },
-
-    "rdt:pd41": { "prov:activity": "rdt:p41", "prov:entity": "rdt:d41" },
-    "rdt:pd42": { "prov:activity": "rdt:p42", "prov:entity": "rdt:d42" },
-    "rdt:pd43": { "prov:activity": "rdt:p43", "prov:entity": "rdt:d43" },
-    "rdt:pd44": { "prov:activity": "rdt:p44", "prov:entity": "rdt:d44" },
-    "rdt:pd45": { "prov:activity": "rdt:p45", "prov:entity": "rdt:d45" }
+    "rdt:pd1": { "prov:activity": "rdt:p2", "prov:entity": "rdt:d1" },
+    "rdt:pd2": { "prov:activity": "rdt:p3", "prov:entity": "rdt:d2" },
+    "rdt:pd3": { "prov:activity": "rdt:p4", "prov:entity": "rdt:d3" },
+    "rdt:pd4": { "prov:activity": "rdt:p5", "prov:entity": "rdt:d4" },
+    "rdt:pd5": { "prov:activity": "rdt:p6", "prov:entity": "rdt:d5" }
   },
 
   "used": {
-    "rdt:dp1":  { "prov:entity": "rdt:d1",  "prov:activity": "rdt:p3" },
-    "rdt:dp2":  { "prov:entity": "rdt:d2",  "prov:activity": "rdt:p5" },
-    "rdt:dp3":  { "prov:entity": "rdt:d3",  "prov:activity": "rdt:p5" },
-    "rdt:dp4":  { "prov:entity": "rdt:d4",  "prov:activity": "rdt:p6" },
-
-    "rdt:dp11": { "prov:entity": "rdt:d11", "prov:activity": "rdt:p13" },
-    "rdt:dp12": { "prov:entity": "rdt:d12", "prov:activity": "rdt:p13" },
-    "rdt:dp13": { "prov:entity": "rdt:d13", "prov:activity": "rdt:p14" },
-
-    "rdt:dp21": { "prov:entity": "rdt:d21", "prov:activity": "rdt:p23" },
-    "rdt:dp22": { "prov:entity": "rdt:d21", "prov:activity": "rdt:p24" },
-    "rdt:dp23": { "prov:entity": "rdt:d22", "prov:activity": "rdt:p24" },
-    "rdt:dp24": { "prov:entity": "rdt:d23", "prov:activity": "rdt:p24" },
-    "rdt:dp25": { "prov:entity": "rdt:d21", "prov:activity": "rdt:p25" },
-
-    "rdt:dp31": { "prov:entity": "rdt:d31", "prov:activity": "rdt:p33" },
-    "rdt:dp32": { "prov:entity": "rdt:d32", "prov:activity": "rdt:p33" },
-    "rdt:dp33": { "prov:entity": "rdt:d33", "prov:activity": "rdt:p34" },
-
-    "rdt:dp41": { "prov:entity": "rdt:d41", "prov:activity": "rdt:p43" },
-    "rdt:dp42": { "prov:entity": "rdt:d42", "prov:activity": "rdt:p43" },
-    "rdt:dp43": { "prov:entity": "rdt:d43", "prov:activity": "rdt:p44" },
-    "rdt:dp44": { "prov:entity": "rdt:d43", "prov:activity": "rdt:p45" }
+    "rdt:dp1": { "prov:entity": "rdt:d1", "prov:activity": "rdt:p3" },
+    "rdt:dp2": { "prov:entity": "rdt:d2", "prov:activity": "rdt:p5" },
+    "rdt:dp3": { "prov:entity": "rdt:d3", "prov:activity": "rdt:p5" },
+    "rdt:dp4": { "prov:entity": "rdt:d4", "prov:activity": "rdt:p6" }
   },
 
   "scripts": {
-    "proposal_workflow.R": "# Proposal Workflow\n# Everyday Example 1: Proposal drafting & peer review\n\ndraft_v1 <- 'Intro: First draft of HF 2019 REU Proposal'\ndraft_v2 <- paste(draft_v1, 'Methodology: Mixed-methods')\n\nfeedback <- c(rev1 = 'Add context', rev2 = 'Solid')\nfinal_text <- paste(draft_v2, paste(feedback, collapse='; '))\n\npdf('HF_2019_REU_PROPOSAL.pdf')\nplot.new()\ntext(0.5, 0.5, final_text)\ndev.off()",
-
-    "coffee_tracker.R": "# Weekly Coffee Tracker\n# Everyday Example 2: Calculating espresso expenses\n\ndaily_cups <- c(Mon=2, Tue=3, Wed=2, Thu=4, Fri=1)\nprice_per_cup <- 4.50\n\nweekly_spent <- sum(daily_cups) * price_per_cup\nwrite.csv(weekly_spent, 'coffee_summary.csv')",
-
-    "weather_analysis.R": "# Weather Analysis\n# Everyday Example 3: Tracking temperature & hot days\n\ntemps <- c(72, 68, 75, 80, 77, 65, 70)\ndays  <- c('Mon','Tue','Wed','Thu','Fri','Sat','Sun')\n\navg_temp <- mean(temps)\nhot_days <- days[temps > avg_temp]\n\npdf('weather_chart.pdf')\nbarplot(temps, names.arg = days, col = 'steelblue')\ndev.off()",
-
-    "recipe_scaling.R": "# Recipe Scaling\n# Everyday Example 4: Scaling cookie ingredients\n\nrecipe <- data.frame(ing = c('flour','sugar','eggs'), amt = c(2, 1, 3))\nscale_factor <- 3\n\nscaled <- recipe\nscaled$amt <- recipe$amt * scale_factor\nwrite.csv(scaled, 'party_recipe.csv')",
-
-    "student_grades.R": "# Student Grading\n# Everyday Example 5: Class average & letter grades\n\nstudents <- c('Alice','Bob','Carol','Dan')\nscores   <- c(92, 85, 78, 96)\n\ngrades <- data.frame(name = students, score = scores)\ngrades$letter <- ifelse(grades$score >= 90, 'A', 'B')\nclass_avg <- mean(grades$score)"
+    "proposal_workflow.R": "# Proposal Workflow\n# Drafting, peer review & artifact publication\n\ndraft_v1 <- 'Intro: First draft of proposal'\ndraft_v2 <- paste(draft_v1, 'Methodology: Mixed-methods')\n\nfeedback <- c(rev1 = 'Add context', rev2 = 'Solid')\nfinal_text <- paste(draft_v2, paste(feedback, collapse='; '))\n\npdf('proposal.pdf')\nplot.new()\ntext(0.5, 0.5, final_text)\ndev.off()"
   }
 }

@@ -1,15 +1,40 @@
 <script lang="ts">
   import { activeScriptState, currentScriptMeta, currentScenarioMetadata } from '../../state.svelte';
-  import { themeState } from '../../themeState.svelte';
+  import { parseProvData } from '../../data/provParser';
+  import scriptSource from '../../data/script_source.json';
   import Icon from '../Icon.svelte';
   import Prism from 'prismjs';
   import 'prismjs/components/prism-r';
 
-  const scripts = $derived(Object.values(currentScenarioMetadata()));
+  import type { ScriptMeta } from '../../scriptData';
+
+  let { provData } = $props<{ provData?: any }>();
+
+  const parsed = $derived(provData ? parseProvData(provData, scriptSource) : null);
   const activeMeta = $derived(currentScriptMeta());
 
+  const scripts = $derived(
+    parsed
+      ? [{ id: parsed.scriptName, name: parsed.scriptName, icon: 'document' }]
+      : (Object.values(currentScenarioMetadata()) as ScriptMeta[])
+  );
+
+  const displayMeta = $derived(
+    parsed
+      ? {
+          id: parsed.scriptName,
+          name: parsed.scriptName,
+          category: 'Analysis Script',
+          icon: 'document',
+          variables: parsed.variables.map(v => v.name),
+          outputFile: parsed.outputArtifacts.map(a => a.name).join(', ') || 'In-memory workspace',
+          code: parsed.sourceCode
+        }
+      : activeMeta
+  );
+
   const highlightedCode = $derived(
-    activeMeta ? Prism.highlight(activeMeta.code, Prism.languages.r, 'r') : ''
+    displayMeta ? Prism.highlight(displayMeta.code, Prism.languages.r, 'r') : ''
   );
 </script>
 
@@ -30,20 +55,20 @@
 
   <!-- E-Ink Paper View -->
   <div class="eink-paper">
-    {#if activeMeta}
+    {#if displayMeta}
       <div class="paper-header">
         <div class="header-left">
-          <span class="file-tag">R Script</span>
-          <span class="file-title">{activeMeta.name}</span>
+          <span class="file-tag">R Source</span>
+          <span class="file-title">{displayMeta.name}</span>
         </div>
-        <span class="file-cat">{activeMeta.category}</span>
+        <span class="file-cat">{displayMeta.category}</span>
       </div>
 
       <!-- Quick Flow Bar -->
       <div class="flow-bar">
-        <span class="flow-item">Variables: <code>{activeMeta.variables.join(', ')}</code></span>
+        <span class="flow-item">Variables: <code>{displayMeta.variables.slice(0, 4).join(', ')}{displayMeta.variables.length > 4 ? '...' : ''}</code></span>
         <span class="flow-sep">→</span>
-        <span class="flow-item">Output: <code>{activeMeta.outputFile}</code></span>
+        <span class="flow-item">Output: <code>{displayMeta.outputFile}</code></span>
       </div>
 
       <!-- Source Code Display -->
@@ -65,7 +90,6 @@
     gap: 0.7rem;
   }
 
-  /* Liquid Glass Tab Pills */
   .tab-bar {
     display: flex;
     gap: 0.45rem;
@@ -106,7 +130,6 @@
     box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   }
 
-  /* E-Ink Paper */
   .eink-paper {
     flex: 1;
     background: var(--code-paper-bg);
@@ -123,9 +146,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 0.4rem;
     border-bottom: 1px solid var(--border);
-    font-family: var(--font-mono, monospace);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.4rem;
   }
 
   .header-left {
@@ -135,67 +158,66 @@
   }
 
   .file-tag {
-    font-size: 0.58rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.64rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.12rem 0.45rem;
     background: var(--pill-bg);
-    border: 1px solid var(--border);
-    border-radius: 9999px;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
     color: var(--text-muted);
   }
 
   .file-title {
-    font-size: 0.76rem;
-    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--text);
   }
 
   .file-cat {
     font-family: var(--font-sans);
-    font-size: 0.62rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
   }
 
-  /* Flow Bar inside E-ink Paper */
   .flow-bar {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.3rem 0.65rem;
-    margin: 0.45rem 0 0.6rem;
-    background: var(--pill-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    gap: 0.5rem;
     font-family: var(--font-mono, monospace);
-    font-size: 0.66rem;
+    font-size: 0.68rem;
     color: var(--text-secondary);
+    padding: 0.35rem 0.6rem;
+    background: var(--glass-bg);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+  .flow-bar code {
+    color: var(--accent);
+    font-weight: 600;
   }
 
   .flow-sep {
     color: var(--text-muted);
-    font-weight: 700;
   }
 
   .code-scroll {
     flex: 1;
     overflow-y: auto;
-    padding-right: 0.3rem;
   }
 
   .eink-code {
-    font-family: var(--font-mono, monospace);
-    font-size: 0.74rem;
-    line-height: 1.45;
-    color: var(--code-text);
-    white-space: pre-wrap;
-    word-break: break-word;
     margin: 0;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    line-height: 1.45;
   }
 
   .empty-msg {
+    text-align: center;
     color: var(--text-muted);
-    font-style: italic;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    padding: 2rem 0;
   }
 </style>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { themeState } from '../../themeState.svelte';
+
   let { provData } = $props<{ provData: any }>();
 
   const usedRels = $derived(provData?.used || {});
@@ -13,28 +15,37 @@
     Object.values(genRels).forEach((g: any) => {
       const actName = activities[g['prov:activity']]?.['rdt:name'] || g['prov:activity'];
       const entName = entities[g['prov:entity']]?.['rdt:name'] || g['prov:entity'];
-      const shortAct = actName.length > 28 ? actName.slice(0, 26) + '…' : actName;
+      const shortAct = actName.length > 24 ? actName.slice(0, 22) + '…' : actName;
       list.push({ source: shortAct, target: entName, verb: 'generated' });
     });
 
     Object.values(usedRels).forEach((u: any) => {
       const entName = entities[u['prov:entity']]?.['rdt:name'] || u['prov:entity'];
       const actName = activities[u['prov:activity']]?.['rdt:name'] || u['prov:activity'];
-      const shortAct = actName.length > 28 ? actName.slice(0, 26) + '…' : actName;
+      const shortAct = actName.length > 24 ? actName.slice(0, 22) + '…' : actName;
       list.push({ source: shortAct, target: entName, verb: 'used' });
     });
     return list;
   });
+
+  const isLight = $derived(themeState.readingMode === 'light');
+  const displayedEdges = $derived(
+    isLight ? edgeDescs.slice(0, Math.min(4, edgeDescs.length)) : edgeDescs
+  );
 </script>
 
-<div class="derivation-page">
-  <h3>Derivation Edges</h3>
+<div class="derivation-page" class:mode-light={isLight}>
+  <h3>Derivation Flow</h3>
   <p class="deriv-intro">
-    All <strong>generated</strong> (creates value) and <strong>used</strong> (reads value) derivation edges.
+    {#if isLight}
+      Key dependency relationships between computational operations and data artifacts:
+    {:else}
+      All <strong>generated</strong> (creates value) and <strong>used</strong> (reads value) derivation edges.
+    {/if}
   </p>
 
   <div class="edge-list">
-    {#each edgeDescs as edge}
+    {#each displayedEdges as edge}
       <div class="glass-edge-pill">
         <span class="edge-source">{edge.source}</span>
         <span class="edge-arrow">
@@ -46,9 +57,15 @@
     {/each}
   </div>
 
+  {#if isLight && edgeDescs.length > 4}
+    <div class="sparse-footer-pill">
+      <span>Showing {displayedEdges.length} primary relationships ({edgeDescs.length - displayedEdges.length} more in @detailedmode)</span>
+    </div>
+  {/if}
+
   <div class="colophon">
     <p>
-      Published by <strong>provBookR</strong> · End-to-End Provenance
+      Assembled by <strong>provBookR</strong>
     </p>
   </div>
 </div>
@@ -141,5 +158,20 @@
     font-size: 0.72rem;
     color: var(--text-muted);
     text-align: center;
+  }
+
+  .sparse-footer-pill {
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.8rem;
+    background: var(--pill-bg, rgba(0, 0, 0, 0.04));
+    border-radius: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .mode-light .edge-list {
+    gap: 0.55rem;
   }
 </style>

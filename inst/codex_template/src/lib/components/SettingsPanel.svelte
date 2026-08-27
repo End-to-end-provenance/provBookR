@@ -36,10 +36,18 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="settings-backdrop" onclick={() => themeState.isOpen = false}></div>
   <div class="settings-popover">
-    
+    <div class="popover-header">
+      <h3>Typography & Appearance</h3>
+    </div>
     <div class="settings-section">
+      <div class="settings-row">
+        <span class="row-label">Reading</span>
+        <div class="seg-bar">
+          <button class="seg" class:on={themeState.readingMode === 'light'} onclick={() => themeState.readingMode = 'light'}>Light (Sparse)</button>
+          <button class="seg" class:on={themeState.readingMode === 'detailed'} onclick={() => themeState.readingMode = 'detailed'}>Detailed (Full)</button>
+        </div>
+      </div>
 
-      
       <div class="settings-row">
         <span class="row-label">Theme</span>
         <div class="seg-bar">
@@ -97,42 +105,14 @@
           <button class="seg" class:on={themeState.justified} onclick={() => themeState.justified = true}>Justified</button>
         </div>
       </div>
-    </div>
 
-    <div class="settings-section">
       <div class="settings-row">
-        <span class="row-label">Page Turn</span>
+        <span class="row-label">Cover Style</span>
         <div class="seg-bar">
-          {#each curlModes as m}
-            <button class="seg" class:on={m.value === 'off' ? !themeState.curlEnabled : (themeState.curlEnabled && themeState.curlMode === m.value)} 
-                    onclick={() => { 
-                      if (m.value === 'off') {
-                        themeState.curlEnabled = false;
-                      } else {
-                        themeState.curlEnabled = true; 
-                        themeState.curlMode = m.value as 'curl' | 'ripple';
-                      }
-                    }}>{m.label}</button>
-          {/each}
+          <button class="seg" class:on={themeState.coverStyle === 'modern'} onclick={() => themeState.coverStyle = 'modern'}>Modern</button>
+          <button class="seg" class:on={themeState.coverStyle === 'classic'} onclick={() => themeState.coverStyle = 'classic'}>Classic</button>
         </div>
       </div>
-
-      {#if themeState.curlEnabled}
-        <div class="settings-row">
-          <span class="row-label">Radius</span>
-          <div class="slider-pair">
-            <input type="range" min="0.04" max="0.2" step="0.02" bind:value={themeState.curlRadius} class="custom-range" />
-            <span class="slider-val">{themeState.curlRadius}</span>
-          </div>
-        </div>
-        <div class="settings-row">
-          <span class="row-label">Speed</span>
-          <div class="slider-pair">
-            <input type="range" min="0.3" max="2.0" step="0.1" bind:value={themeState.curlSpeed} class="custom-range" />
-            <span class="slider-val">{themeState.curlSpeed}s</span>
-          </div>
-        </div>
-      {/if}
     </div>
   </div>
 {/if}
@@ -151,16 +131,15 @@
     transform: translateX(-50%);
     z-index: 999;
     width: 440px; /* Narrower width, perfect for vertical list */
-    background: var(--glass-bg, rgba(255, 255, 255, 0.82));
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.9));
+    background: var(--popover-bg, #faf9f5);
+    background-color: var(--popover-bg, #faf9f5);
+    border: 1px solid var(--popover-border, rgba(0, 0, 0, 0.14));
     border-radius: 20px;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--popover-shadow, 0 24px 60px -8px rgba(0, 0, 0, 0.25));
     animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 

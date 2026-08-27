@@ -4,10 +4,8 @@
   import ReadingSettings from './ReadingSettings.svelte';
   import PageCurl from './PageCurl.svelte';
   import Dock from './Dock.svelte';
-  import PageCanvas from './PageCanvas.svelte';
   import Icon from './Icon.svelte';
   import { themeState } from '../themeState.svelte';
-  import { animationState } from '../animationState.svelte';
   import { activeScenarioState } from '../state.svelte';
   import { resolveSweep } from './pageCurlTypes';
   import type { SweepStyle } from './pageCurlTypes';
@@ -293,7 +291,7 @@
     <!-- Disclaimer gate -->
     <div class="mobile-gate">
       <div class="gate-content">
-        <p class="gate-label">provBook</p>
+        <p class="gate-label">provBookR</p>
         <h2 class="gate-title">Best experienced on desktop</h2>
         <p class="gate-body">
           This interactive book was designed for a two-page spread layout with
@@ -362,15 +360,6 @@
       {#snippet leftControls()}
         <button 
           class="dock-btn" 
-          class:active={animationState.isOpen} 
-          onclick={() => animationState.isOpen = !animationState.isOpen} 
-          aria-label="Animation Studio" 
-          title="Animate Page"
-        >
-          <Icon name="palette" size={18} />
-        </button>
-        <button 
-          class="dock-btn" 
           class:active={activeScenarioState.isOpen} 
           onclick={() => activeScenarioState.isOpen = !activeScenarioState.isOpen} 
           aria-label="Notebook Scenarios" 
@@ -404,7 +393,6 @@
   >
     {#if isCover && coverPage}
       <div class="cover-page" onclick={flipNext}>
-        <div class="canvas-wrapper"><PageCanvas /></div>
         {@render coverPage()}
       </div>
     {:else}
@@ -414,7 +402,6 @@
         class:justified
         style="font-size:var(--reading-size);font-family:var(--reading-font);line-height:var(--reading-lh);"
       >
-        <div class="canvas-wrapper"><PageCanvas /></div>
         <div 
           class="page-inner"
           bind:this={leftHalf}
@@ -435,7 +422,7 @@
             </button>
           {/if}
         </div>
-        <button class="page-tap left-tap" onclick={flipPrev} aria-label="Previous page" tabindex="-1"></button>
+        <button class="page-tap left-tap" onclick={flipPrev} aria-label="Tap to go back" tabindex="-1"></button>
       </div>
 
       <div class="spine"></div>
@@ -446,7 +433,6 @@
         class:justified
         style="font-size:var(--reading-size);font-family:var(--reading-font);line-height:var(--reading-lh);"
       >
-        <div class="canvas-wrapper"><PageCanvas /></div>
         <div 
           class="page-inner"
           bind:this={rightHalf}
@@ -467,7 +453,7 @@
             </button>
           {/if}
         </div>
-        <button class="page-tap right-tap" onclick={flipNext} aria-label="Next page" tabindex="-1"></button>
+        <button class="page-tap right-tap" onclick={flipNext} aria-label="Tap to advance" tabindex="-1"></button>
       </div>
     {/if}
   </div>
@@ -490,15 +476,6 @@
     {#snippet leftControls()}
       <button 
         class="dock-btn" 
-        class:active={animationState.isOpen} 
-        onclick={() => animationState.isOpen = !animationState.isOpen} 
-        aria-label="Animation Studio" 
-        title="Animate Page"
-      >
-        <Icon name="palette" size={15} />
-      </button>
-      <button 
-        class="dock-btn" 
         class:active={activeScenarioState.isOpen} 
         onclick={() => activeScenarioState.isOpen = !activeScenarioState.isOpen} 
         aria-label="Notebook Scenarios" 
@@ -514,7 +491,7 @@
       <button class="dock-btn" onclick={flipNext} disabled={currentSpread >= totalSpreads - 1 || flipping} aria-label="Next Page">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
-      <span class="page-indicator">{currentSpread + 1} / {totalSpreads}</span>
+      <span class="page-indicator">{currentSpread === 0 ? 'Cover' : `Sp ${currentSpread}`}</span>
     {/snippet}
   </Dock>
 {/if}
@@ -566,16 +543,6 @@
     color: var(--text-body, var(--text));
   }
 
-  /* ── Canvas Wrapper fixed behind content ── */
-  .canvas-wrapper {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
 
   /* ── Bleed-through text effect (from reference image) ── */
   .half::before {

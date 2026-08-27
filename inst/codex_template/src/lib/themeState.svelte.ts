@@ -4,10 +4,12 @@ export const themeState = $state({
   isOpen: false,                 // UI toggle for the settings panel
   
   // Typography/Reading Settings
+  readingMode: 'light' as 'detailed' | 'light', // 'detailed' = full provenance data dump, 'light' = sparse, curated book reading
   fontSize: 12.5,
   fontFamily: 'sans',
   lineHeight: 1.78,
   justified: true,
+  coverStyle: 'modern' as 'modern' | 'classic',
 
   // Page Turn Settings
   curlEnabled: false,

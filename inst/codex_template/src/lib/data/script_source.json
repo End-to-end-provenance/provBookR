@@ -1,0 +1,4 @@
+{
+  "name": "everyday_workflow.R",
+  "code": "# Everyday Workflow\n# 1. Data Ingestion\nset.seed(42)\nraw_data <- rnorm(100)\n\n# 2. Processing\nsummary_stats <- summary(raw_data)\n\n# 3. Export Output\nwrite.csv(summary_stats, 'summary.csv')\n"
+}

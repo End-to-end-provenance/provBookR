@@ -103,7 +103,7 @@ if (!is.null(prov_data$wasGeneratedBy)) {
 
 # 5. Render the interactive visualization
 message("Rendering network...")
-visNetwork(nodes, edges, main = "Provenance: HF 2019 REU PROPOSAL", width = "100%", height = "800px") %>%
+visNetwork(nodes, edges, main = "Provenance: Proposal Workflow", width = "100%", height = "800px") %>%
   visNodes(shadow = TRUE) %>%
   visEdges(smooth = list(type = "cubicBezier", forceDirection = "vertical")) %>%
   visOptions(

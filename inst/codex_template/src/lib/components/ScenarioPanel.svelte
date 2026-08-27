@@ -1,10 +1,13 @@
 <script lang="ts">
   import { activeScenarioState, activeScriptState, currentScenarioMetadata } from '../state.svelte';
   import type { ScenarioId } from '../data/scenarios';
+  import scriptSource from '../data/script_source.json';
   import Icon from './Icon.svelte';
 
+  const activeLabel = (scriptSource as any)?.name ? (scriptSource as any).name : 'Notebook';
+
   const scenariosList = [
-    { id: 'everyday', label: 'Everyday', icon: 'coffee' },
+    { id: 'everyday', label: activeLabel, icon: 'file-text' },
     { id: 'blank', label: 'Blank', icon: 'book' }
   ];
 
@@ -37,7 +40,7 @@
             onclick={() => switchScenario(p.id as any)}
           >
             <Icon name={p.icon} size={20} strokeWidth={activeScenarioState.currentId === p.id ? 2.5 : 1.5} />
-            <span class="preset-label">{p.label}</span>
+            <span class="preset-label" title={p.label}>{p.label}</span>
           </button>
         {/each}
       </div>
@@ -53,17 +56,15 @@
     bottom: 5.5rem;
     left: 2rem;
     width: 320px;
-    background: var(--glass-bg, rgba(255, 255, 255, 0.85));
-    backdrop-filter: blur(24px) saturate(1.5);
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.3));
+    background: var(--popover-bg, #faf9f5);
+    background-color: var(--popover-bg, #faf9f5);
+    border: 1px solid var(--popover-border, rgba(0, 0, 0, 0.14));
     border-radius: 20px;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    box-shadow: 
-      0 12px 40px -8px rgba(0,0,0,0.15),
-      0 0 0 1px inset rgba(255,255,255,0.4);
+    box-shadow: var(--popover-shadow, 0 24px 60px -8px rgba(0, 0, 0, 0.25));
     z-index: 1000;
     font-family: var(--font-sans);
     animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -127,6 +128,8 @@
     color: var(--text-secondary, #4a4a5a);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid transparent;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .preset-card:hover {
@@ -146,6 +149,12 @@
     font-family: var(--font-sans);
     font-size: 0.7rem;
     font-weight: 500;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0 0.25rem;
   }
   .preset-card.on .preset-label {
     font-weight: 600;

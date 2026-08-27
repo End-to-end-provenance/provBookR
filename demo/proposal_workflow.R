@@ -21,7 +21,7 @@ final_text <- paste(
 pdf("scientific_proposal_demo.pdf", width = 8, height = 11)
 plot.new()
 text(x = 0.5, y = 0.8, labels = "SCIENTIFIC PROPOSAL DEMO", cex = 2, font = 2)
-text(x = 0.5, y = 0.5, labels = final_text, cex = 1, wrap = TRUE)
+text(x = 0.5, y = 0.5, labels = final_text, cex = 1)
 text(x = 0.5, y = 0.2, labels = "Status: FINAL", col = "red")
 dev.off()
 

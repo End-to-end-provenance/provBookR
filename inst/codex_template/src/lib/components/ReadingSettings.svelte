@@ -111,50 +111,6 @@
         <button class="opt tog" class:sel={justified} onclick={() => { justified = !justified; }}>{justified ? 'On' : 'Off'}</button>
       </div>
 
-      <div class="divider"></div>
-      <div class="panel-title">Page Turn</div>
-
-      <div class="row">
-        <span class="label">Effect</span>
-        <button class="opt tog" class:sel={curlEnabled} onclick={() => { curlEnabled = !curlEnabled; }}>{curlEnabled ? 'On' : 'Off'}</button>
-      </div>
-
-      {#if curlEnabled}
-        <div class="row">
-          <span class="label">Style</span>
-          <div class="group">
-            <button class="opt" class:sel={curlMode === 'curl'} onclick={() => { curlMode = 'curl'; }}>Curl</button>
-            <button class="opt" class:sel={curlMode === 'ripple'} onclick={() => { curlMode = 'ripple'; }}>Ripple</button>
-          </div>
-        </div>
-
-        <div class="row">
-          <span class="label">Direction</span>
-          <div class="group">
-            {#each sweepDirections as sd}
-              <button class="opt" class:sel={curlSweep === sd.value} onclick={() => { curlSweep = sd.value; }}>{sd.label}</button>
-            {/each}
-          </div>
-        </div>
-
-        <div class="row">
-          <span class="label">Radius</span>
-          <div class="group">
-            {#each curlRadii as cr}
-              <button class="opt" class:sel={curlRadius === cr.value} onclick={() => { curlRadius = cr.value; }}>{cr.label}</button>
-            {/each}
-          </div>
-        </div>
-
-        <div class="row">
-          <span class="label">Speed</span>
-          <div class="group">
-            {#each curlSpeeds as cs}
-              <button class="opt" class:sel={curlSpeed === cs.value} onclick={() => { curlSpeed = cs.value; }}>{cs.label}</button>
-            {/each}
-          </div>
-        </div>
-      {/if}
     </div>
   {/if}
 </div>

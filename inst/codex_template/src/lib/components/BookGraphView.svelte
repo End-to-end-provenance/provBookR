@@ -15,7 +15,7 @@
   }
 </script>
 
-<div class="slide-sorter">
+<div class="slide-sorter book-graph-view">
   <div class="sorter-header">
     <h2>Book Overview</h2>
     <p>Click any spread to jump directly into that chapter.</p>

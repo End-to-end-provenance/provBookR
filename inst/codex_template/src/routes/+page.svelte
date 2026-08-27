@@ -18,9 +18,15 @@
 
   import { activeScenarioState, viewModeState, bookNavigationState } from '$lib/state.svelte';
   import { scenarios } from '$lib/data/scenarios';
+  import scriptSource from '$lib/data/script_source.json';
+  import { parseProvData } from '$lib/data/provParser';
 
   let provData = $derived(scenarios[activeScenarioState.currentId].provData);
   let isBlank = $derived(activeScenarioState.currentId === 'blank');
+
+  const parsed = $derived(provData ? parseProvData(provData, scriptSource) : null);
+  const scriptName = $derived(parsed?.scriptName || (scriptSource as any)?.name || 'script.R');
+  const pageTitle = $derived(`provBookR: ${scriptName}`);
 
   const contentSpreads = [
     [IntroLeft, IntroRight],       // Chapter 1: Everyday Provenance
@@ -37,7 +43,7 @@
 </script>
 
 <svelte:head>
-  <title>provBook</title>
+  <title>{pageTitle}</title>
 </svelte:head>
 
 {#if viewModeState.mode === 'graph'}
@@ -53,9 +59,10 @@
     {provData} 
   />
 {:else}
-  <PageFlip
-    currentSpread={bookNavigationState.currentSpread}
-    {totalSpreads}
+  <div class="page-flip-container">
+    <PageFlip
+      currentSpread={bookNavigationState.currentSpread}
+      {totalSpreads}
     onNext={next}
     onPrev={prev}
     isCover={bookNavigationState.currentSpread === 0}
@@ -98,6 +105,15 @@
       {/if}
     {/snippet}
   </PageFlip>
+  </div>
   <GuideOverlay />
 {/if}
 
+<style>
+  .page-flip-container {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: relative;
+  }
+</style>

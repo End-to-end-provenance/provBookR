@@ -1,6 +1,5 @@
 <script lang="ts">
   import { themeState } from '../themeState.svelte';
-  import { animationState } from '../animationState.svelte';
   import { annotationsPanelState, viewModeState, annotationsState, currentScriptMeta, guideState } from '../state.svelte';
   import Icon from './Icon.svelte';
 
@@ -80,7 +79,7 @@
 <style>
   .dock-container {
     position: fixed;
-    bottom: 0.85rem;
+    bottom: calc((5rem - 38px) / 2);
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
@@ -94,9 +93,9 @@
     background: var(--glass-bg, rgba(255, 255, 255, 0.75));
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.9));
+    border: 1px solid var(--border, rgba(0, 0, 0, 0.1));
     border-radius: 9999px;
-    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    box-shadow: var(--glass-shadow);
   }
 
   :global(.dock-btn) {
@@ -113,13 +112,13 @@
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   :global(.dock-btn:hover) {
-    background: rgba(0, 0, 0, 0.06);
+    background: var(--pill-bg, rgba(0, 0, 0, 0.06));
     color: var(--text, #1a1a24);
   }
   :global(.dock-btn.active) {
-    background: #1a1a24;
-    color: #ffffff;
-    box-shadow: 0 3px 10px rgba(26, 26, 36, 0.3);
+    background: var(--pill-badge-bg, #1a1a24);
+    color: var(--pill-badge-text, #ffffff);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   }
   :global(.dock-btn:disabled) {
     opacity: 0.3;
@@ -133,7 +132,7 @@
   :global(.divider) {
     width: 1px;
     height: 16px;
-    background: rgba(0, 0, 0, 0.15);
+    background: var(--border, rgba(0, 0, 0, 0.15));
     margin: 0 0.15rem;
   }
 
@@ -141,11 +140,11 @@
     position: absolute;
     top: -2px;
     right: -2px;
-    background: #ef4444; /* red accent for notifications */
-    color: white;
+    background: var(--text, #111);
+    color: var(--bg, #fff);
     font-size: 0.55rem;
     font-weight: 700;
-    font-family: var(--font-mono, monospace);
+    font-family: var(--font-sans);
     width: 14px;
     height: 14px;
     display: flex;
@@ -155,22 +154,34 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   }
   :global(.dock-btn.active) :global(.badge) {
-    border: 2px solid #1a1a24;
+    border: 2px solid var(--pill-badge-bg, #1a1a24);
   }
 
   :global(.page-indicator) {
-    font-family: var(--font-mono, monospace);
-    font-size: 0.64rem;
+    all: unset;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
     font-weight: 500;
+    line-height: 1;
     color: var(--text-secondary, #4a4a5a);
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--pill-bg, rgba(0, 0, 0, 0.05));
     padding: 0 0.65rem;
     height: 30px;
     border-radius: 9999px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    margin: 0 0.2rem;
+    margin: 0 0.1rem 0 0.45rem;
+    transform: translateY(1.5px);
+    border: none;
+    outline: none;
+    transition: all 0.18s ease;
+  }
+  :global(.page-indicator:hover) {
+    background: var(--pill-bg, rgba(0, 0, 0, 0.12));
+    color: var(--text, #1a1a24);
   }
 </style>

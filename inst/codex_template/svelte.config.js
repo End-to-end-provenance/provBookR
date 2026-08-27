@@ -8,6 +8,9 @@ const config = {
       filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
   },
   kit: {
+    paths: {
+      relative: true
+    },
     // adapter-static for Firebase Hosting
     adapter: adapter({
       pages: "build",

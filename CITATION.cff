@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: "provBookR: Interactive Computational Provenance Codices for R"
+message: "If you use this software in your research, please cite it using the metadata from this file."
+type: software
+authors:
+  - name: "Anonymous Author(s)"
+repository-code: "https://github.com/End-to-end-provenance/provBookR"
+abstract: "provBookR builds interactive, web-native digital booklet codices from captured computational provenance traces in R scripts."
+keywords:
+  - R
+  - provenance
+  - reproducibility
+  - sveltekit
+  - W3C-PROV

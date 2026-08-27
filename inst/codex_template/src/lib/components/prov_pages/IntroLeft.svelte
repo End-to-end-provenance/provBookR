@@ -1,22 +1,20 @@
 <script lang="ts">
-  import { currentScenario } from '../../state.svelte';
+  import { parseProvData } from '../../data/provParser';
+  import scriptSource from '../../data/script_source.json';
   
-  const scenario = $derived(currentScenario());
+  let { provData } = $props<{ provData: any }>();
+  
+  const summary = $derived(parseProvData(provData, scriptSource));
 </script>
 
 <div class="intro-page">
-  <p class="chapter-label">Section 1</p>
-  <h2>{scenario.name}</h2>
-  <p class="subtitle">{scenario.description}</p>
+  <p class="chapter-label">Chapter 1: Overview</p>
+  <h2>{summary.scriptName}</h2>
+  <p class="subtitle">Computational Provenance & Execution Blueprint</p>
 
-  <p>
-    {#if scenario.id === 'everyday'}
-      Whether you are drafting a research proposal, scaling a baking recipe, or calculating your weekly coffee expense,
-      every computational task follows a natural flow:
-    {:else}
-      In high-performance computing pipelines, from graph construction to iterative solvers,
-      every computational task follows a natural flow:
-    {/if}
+  <p class="intro-text">
+    This notebook documents the execution of <code>{summary.scriptName}</code>, tracking all data inputs,
+    computational operations, intermediate state mutations, and generated output artifacts.
   </p>
 
   <!-- Flow Breakdown Cards (Liquid Glass Bubble Pills) -->
@@ -24,30 +22,42 @@
     <div class="flow-pill">
       <div class="pill-badge">1</div>
       <div class="pill-content">
-        <h4>Inputs (Data)</h4>
-        <p>Values, parameters, text drafts, or initial raw files fed into the script.</p>
+        <h4>Inputs & Variables ({summary.variables.length})</h4>
+        <p>
+          {#if summary.variables.length > 0}
+            Tracking: <code>{summary.variables.slice(0, 3).map(v => v.name).join(', ')}{summary.variables.length > 3 ? '...' : ''}</code>
+          {:else}
+            No external inputs declared.
+          {/if}
+        </p>
       </div>
     </div>
 
     <div class="flow-pill">
       <div class="pill-badge">2</div>
       <div class="pill-content">
-        <h4>Operations (Logic)</h4>
-        <p>Function calls, math formulas, and string transformations that process the data.</p>
+        <h4>Operations & Activities ({summary.operationsCount})</h4>
+        <p>Executed in <strong>{summary.totalElapsedTime}s</strong> across <strong>{summary.langVersion}</strong> on <strong>{summary.operatingSystem}</strong>.</p>
       </div>
     </div>
 
     <div class="flow-pill">
       <div class="pill-badge">3</div>
       <div class="pill-content">
-        <h4>Outputs (Artifacts)</h4>
-        <p>Final variables, summary tables, generated PDFs, or exported CSV files.</p>
+        <h4>Artifacts & Outputs ({summary.outputArtifacts.length})</h4>
+        <p>
+          {#if summary.outputArtifacts.length > 0}
+            Generated: <code>{summary.outputArtifacts.map(a => a.name).join(', ')}</code>
+          {:else}
+            Interactive memory state snapshot.
+          {/if}
+        </p>
       </div>
     </div>
   </div>
 
   <div class="note">
-    <strong>Key Idea:</strong> Provenance records the exact lineage connecting these three steps, so anyone can trace a final artifact back to its origin.
+    <strong>Lineage Guarantee:</strong> Every intermediate variable and final artifact is connected via deterministic W3C PROV-JSON dependency edges.
   </div>
 </div>
 
@@ -66,15 +76,28 @@
     color: var(--text-secondary);
     font-size: 0.88rem;
   }
+  .intro-text {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    margin-bottom: 0.8rem;
+  }
+  .intro-text code {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.76rem;
+    padding: 0.1rem 0.35rem;
+    background: var(--pill-bg, rgba(0, 0, 0, 0.05));
+    border-radius: 4px;
+    color: var(--text);
+  }
 
   .flow-container {
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
-    margin: 0.6rem 0;
+    margin: 0.4rem 0 0.8rem;
   }
 
-  /* Liquid Glass Bubble Pill */
   .flow-pill {
     display: flex;
     align-items: flex-start;
@@ -125,5 +148,20 @@
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.38;
+  }
+
+  .pill-content code {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.68rem;
+    padding: 0.05rem 0.25rem;
+    background: var(--pill-bg, rgba(0, 0, 0, 0.05));
+    border-radius: 4px;
+  }
+
+  .note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    line-height: 1.4;
   }
 </style>

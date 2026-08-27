@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { themeState } from '../../themeState.svelte';
+
   let { provData } = $props<{ provData: any }>();
 
   const activities = $derived(provData?.activity || {});
@@ -17,18 +19,26 @@
       }))
   );
 
+  const isLight = $derived(themeState.readingMode === 'light');
+  const displayedOps = $derived(
+    isLight ? operations.slice(0, Math.min(3, operations.length)) : operations
+  );
+
   const totalOps = $derived(operations.length);
   const totalTime = $derived(operations.reduce((sum, op) => sum + op.time, 0));
   const totalEdges = $derived(Object.keys(genRels).length + Object.keys(usedRels).length);
 </script>
 
-<div class="output-intro">
-  <p class="chapter-label">Section 5</p>
-  <h2>Execution Timeline</h2>
-  <p>
-    Each operation below represents a single step in the computation.
-    Together they form the full execution trace — a record of
-    <em>what happened, when, and in what order</em>.
+<div class="output-intro" class:mode-light={isLight}>
+  <p class="chapter-label">Chapter 5</p>
+  <h2>Execution Trace</h2>
+  <p class="exec-desc">
+    {#if isLight}
+      A high-level summary of the computational stages executed by the pipeline.
+    {:else}
+      Each operation below represents a single step in the computation.
+      Together they form the full granular execution trace.
+    {/if}
   </p>
 
   <div class="glass-summary">
@@ -47,7 +57,7 @@
   </div>
 
   <div class="timeline">
-    {#each operations as op, idx}
+    {#each displayedOps as op, idx}
       <div class="glass-step">
         <div class="step-badge">{idx + 1}</div>
         <div class="step-body">
@@ -57,6 +67,12 @@
       </div>
     {/each}
   </div>
+
+  {#if isLight && operations.length > 3}
+    <div class="sparse-footer-pill">
+      <span>Showing {displayedOps.length} milestone steps ({operations.length - displayedOps.length} more in @detailedmode)</span>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -159,5 +175,20 @@
     font-family: var(--font-sans);
     font-size: 0.64rem;
     color: var(--text-muted);
+  }
+
+  .sparse-footer-pill {
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.8rem;
+    background: var(--pill-bg, rgba(0, 0, 0, 0.04));
+    border-radius: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .mode-light .timeline {
+    gap: 0.45rem;
   }
 </style>

@@ -11,3 +11,16 @@ inst/codex_template/build/
 *.mp3
 *.ogg
 
+# Generated ProvBooks & Pipeline Data
+books/
+notebooks/books/
+*_book/
+test_*/
+prov_data/
+prov_data_*/
+*.rds
+*.png
+!docs/*.png
+reproducible_proposal_final.md
+reproducible_proposal.md
+testing/

@@ -1,5 +1,5 @@
 <script lang="ts">
-  // Pristine blank page container
+  let { pageKey = '' }: { pageKey?: string } = $props();
 </script>
 
 <div class="blank-page"></div>

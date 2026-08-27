@@ -281,6 +281,10 @@ figure {
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 
+  --popover-bg: #faf9f5;
+  --popover-border: rgba(0, 0, 0, 0.14);
+  --popover-shadow: 0 24px 60px -8px rgba(0, 0, 0, 0.22), 0 4px 16px rgba(0, 0, 0, 0.08);
+
   --card-bg: rgba(255, 255, 255, 0.7);
   --card-bg-hover: rgba(255, 255, 255, 0.85);
   --card-bg-active: #ffffff;
@@ -319,7 +323,7 @@ figure {
   --text-secondary: #c4c4d6;
   --text-muted: #9292a8;
 
-  --accent: #38bdf8;
+  --accent: #ffffff;
   --accent-light: rgba(255, 255, 255, 0.06);
   --border: rgba(255, 255, 255, 0.14);
 
@@ -328,6 +332,10 @@ figure {
   --glass-bg-hover: rgba(42, 42, 64, 0.9);
   --glass-border: rgba(255, 255, 255, 0.14);
   --glass-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.09);
+
+  --popover-bg: #141420;
+  --popover-border: rgba(255, 255, 255, 0.2);
+  --popover-shadow: 0 28px 64px -8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.5);
 
   --card-bg: rgba(26, 26, 40, 0.8);
   --card-bg-hover: rgba(38, 38, 56, 0.9);
@@ -354,9 +362,9 @@ figure {
   --bleed-fill: %23fff;
   --spine-shadow: rgba(0,0,0,0.4);
 
-  --hl-string: #86efac;
+  --hl-string: #a7f3d0;
   --hl-operator: #ffffff;
-  --hl-property: #93c5fd;
+  --hl-property: #e2e8f0;
 }
 
 .theme-high-contrast {

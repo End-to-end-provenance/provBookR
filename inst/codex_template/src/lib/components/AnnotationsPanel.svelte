@@ -40,7 +40,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="anno-backdrop" onclick={() => annotationsPanelState.isOpen = false}></div>
-  <div class="anno-popover">
+  <div class="anno-popover annotations-panel">
     <div class="popover-header">
       <h3>Annotations</h3>
       <button class="close-btn" onclick={() => annotationsPanelState.isOpen = false}>✕</button>
@@ -110,12 +110,11 @@
     max-height: 70vh;
     display: flex;
     flex-direction: column;
-    background: var(--glass-bg, rgba(255, 255, 255, 0.85));
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--glass-border, rgba(255,255,255,0.9));
+    background: var(--popover-bg, #faf9f5);
+    background-color: var(--popover-bg, #faf9f5);
+    border: 1px solid var(--popover-border, rgba(0, 0, 0, 0.14));
     border-radius: 20px;
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--popover-shadow, 0 24px 60px -8px rgba(0, 0, 0, 0.25));
     animation: slideUpCenter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
